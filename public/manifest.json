@@ -1,0 +1,15 @@
+{
+  "short_name": "Dorker",
+  "name": "Find interesting files and accidentally leaked data using just a search engine!",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#1D2025",
+  "background_color": "#1D2025"
+}
