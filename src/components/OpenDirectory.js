@@ -11,6 +11,12 @@ import Checkbox from '@material-ui/core/Checkbox';
 import Search from '@material-ui/icons/Search';
 import { Container } from '@material-ui/core';
 
+const filters = [
+	{ name: 'everything', checked: true },
+	{ name: 'audio', checked: false },
+	{ name: 'video', checked: false }
+]
+
 class OpenDirectory extends React.Component {
 	constructor(props) {
 		super(props);
@@ -18,18 +24,40 @@ class OpenDirectory extends React.Component {
 		this.state = {
 			searchTerm: "",
 			uri: `intext:"" intitle:"index.of" -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)`,
-			everything: true,
+			everything: true, 
 			audio: false,
-			video: false
+			video: false			
 		};
 
 		this.handleChange = this.handleChange.bind(this);
+		this.handleCheck = this.handleCheck.bind(this);
+	}
+
+	updateURI() {
+		this.setState({ uri: `intext:"${this.state.searchTerm}" intitle:"index.of" -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)`})
+	}
+
+	handleCheck(event) {
+		filters.forEach(filter => {
+			if(filter.name === event.target.name) {
+				filter.checked = event.target.checked;
+			} else {
+				filter.checked = false;
+			}
+			this.setState({ [event.target.name] : filter.checked })
+		})
+		
+		filters.forEach(filter => {
+			console.log(`${filter.name} | ${filter.checked}`)
+			this.setState({ [filter.name] : [filter.checked] })
+		})
+
+		//this.setState({ [event.target.name] : event.target.checked });
 	}
 
 	handleChange(event) {
-		this.setState({
-			searchTerm: event.target.value,
-			uri: `intext:"${event.target.value}" intitle:"index.of" -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)`
+		this.setState({ [event.target.name] : event.target.value }, () => {
+			this.updateURI();
 		});
 	}
 
@@ -44,6 +72,7 @@ class OpenDirectory extends React.Component {
 						<form noValidate autoComplete="off">
 							<div>
 								<TextField
+									name="searchTerm"
 									value={this.state.searchTerm}
 									onChange={this.handleChange}
 									id="standard-basic"
@@ -54,13 +83,17 @@ class OpenDirectory extends React.Component {
 								<FormGroup aria-label="position" row>
 									<Container maxWidth="sm" className="CenteredContainer">
 										<FormControlLabel
-											value="start"
+											name="audio"
+											value={this.state.audio}
+											onChange={this.handleCheck}
 											control={<Checkbox color="primary" />}
 											label="Audio"
 											labelPlacement="start"
 										/>
 										<FormControlLabel
-											value="start"
+											name="video"
+											value={this.state.video}
+											onChange={this.handleCheck}
 											control={<Checkbox color="primary" />}
 											label="Video"
 											labelPlacement="start"
@@ -73,13 +106,13 @@ class OpenDirectory extends React.Component {
 						rel="noopener noreferrer"
 						>
 						<Button
-              variant="contained"
+              				variant="contained"
 							color="primary"
 							startIcon={<Search />}
-              style={{margin: "auto"}}
-            >
+              				style={{margin: "auto"}}
+            			>
 						Find Directories
-            </Button>
+            			</Button>
 						</a>
 					</CardContent>
 				</Card>
