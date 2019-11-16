@@ -4,10 +4,12 @@ import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-import Nav from '../components/nav'
+import Nav from '../components/nav';
+import OpenDirectory from '../components/OpenDirectory';
 import '../App.css';
 
 function TabPanel(props) {
@@ -64,7 +66,9 @@ export default function SimpleTabs() {
         </Tabs>
       </AppBar>
       <TabPanel className="App" value={value} index={0}>
-        component here
+        <Container maxWidth="sm" className="CenteredContainer">
+          <OpenDirectory />
+        </Container>
       </TabPanel>
     </div>
   );
