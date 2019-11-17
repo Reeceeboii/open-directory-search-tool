@@ -2,31 +2,23 @@ import React from 'react'
 
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
-import FormGroup from '@material-ui/core/FormGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import CardContent from '@material-ui/core/CardContent';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
+import FormControl from '@material-ui/core/FormControl'
 import Button from '@material-ui/core/Button';
-import Checkbox from '@material-ui/core/Checkbox';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
 import Search from '@material-ui/icons/Search';
-import { Container } from '@material-ui/core';
-
-const filters = [
-	{ name: 'everything', checked: true },
-	{ name: 'audio', checked: false },
-	{ name: 'video', checked: false }
-]
 
 class OpenDirectory extends React.Component {
 	constructor(props) {
 		super(props);
-		
+
 		this.state = {
 			searchTerm: "",
 			uri: `intext:"" intitle:"index.of" -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)`,
-			everything: true, 
-			audio: false,
-			video: false			
+			filter: "Everything"
 		};
 
 		this.handleChange = this.handleChange.bind(this);
@@ -34,29 +26,15 @@ class OpenDirectory extends React.Component {
 	}
 
 	updateURI() {
-		this.setState({ uri: `intext:"${this.state.searchTerm}" intitle:"index.of" -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)`})
+		this.setState({ uri: `intext:"${this.state.searchTerm.trim()}" intitle:"index.of" -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)` })
 	}
 
 	handleCheck(event) {
-		filters.forEach(filter => {
-			if(filter.name === event.target.name) {
-				filter.checked = event.target.checked;
-			} else {
-				filter.checked = false;
-			}
-			this.setState({ [event.target.name] : filter.checked })
-		})
-		
-		filters.forEach(filter => {
-			console.log(`${filter.name} | ${filter.checked}`)
-			this.setState({ [filter.name] : [filter.checked] })
-		})
-
-		//this.setState({ [event.target.name] : event.target.checked });
+		this.setState({ filter: event.target.value });
 	}
 
 	handleChange(event) {
-		this.setState({ [event.target.name] : event.target.value }, () => {
+		this.setState({ [event.target.name]: event.target.value }, () => {
 			this.updateURI();
 		});
 	}
@@ -80,38 +58,43 @@ class OpenDirectory extends React.Component {
 									margin="normal"
 								/>
 							</div>
-								<FormGroup aria-label="position" row>
-									<Container maxWidth="sm" className="CenteredContainer">
-										<FormControlLabel
-											name="audio"
-											value={this.state.audio}
-											onChange={this.handleCheck}
-											control={<Checkbox color="primary" />}
-											label="Audio"
-											labelPlacement="start"
-										/>
-										<FormControlLabel
-											name="video"
-											value={this.state.video}
-											onChange={this.handleCheck}
-											control={<Checkbox color="primary" />}
-											label="Video"
-											labelPlacement="start"
-										/>
-									</Container>
-								</FormGroup>
+							<FormControl component="fieldset" name="filter">
+								<RadioGroup aria-label="position" onChange={this.handleCheck} value={this.state.filter} row>
+									<FormControlLabel
+										value="Everything"
+										control={<Radio color="primary" />}
+										label="Everything"
+										labelPlacement="start"
+									/>
+
+									<FormControlLabel
+										value="Audio"
+										control={<Radio color="primary" />}
+										label="Audio"
+										labelPlacement="start"
+									/>
+
+									<FormControlLabel
+										value="Video"
+										control={<Radio color="primary" />}
+										label="Video"
+										labelPlacement="start"
+									/>
+								</RadioGroup>
+							</FormControl>
 						</form>
-						<a href={`https://www.google.com/search?q=${this.state.uri}`} 
-						target="_blank"
-						rel="noopener noreferrer"
+
+						<a href={`https://www.google.com/search?q=${this.state.uri}`}
+							target="_blank"
+							rel="noopener noreferrer"
 						>
-						<Button
-              				variant="contained"
-							color="primary"
-							startIcon={<Search />}
-              				style={{margin: "auto"}}
-            			>
-						Find Directories
+							<Button
+								variant="contained"
+								color="primary"
+								startIcon={<Search />}
+								style={{ margin: "auto" }}
+							>
+								Find Directories
             			</Button>
 						</a>
 					</CardContent>
