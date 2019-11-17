@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
 import Nav from '../components/nav';
+import Footer from '../components/footer';
 import OpenDirectory from '../components/OpenDirectory';
 import '../App.css';
 
@@ -58,7 +59,7 @@ export default function SimpleTabs() {
   };
 
   return (
-    <div className={classes.root}>
+    <div>
       <Nav />
       <AppBar position="static">
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
@@ -70,6 +71,7 @@ export default function SimpleTabs() {
           <OpenDirectory />
         </Container>
       </TabPanel>
+      <Footer />
     </div>
   );
 }

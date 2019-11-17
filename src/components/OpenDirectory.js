@@ -6,10 +6,21 @@ import CardContent from '@material-ui/core/CardContent';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
 import FormControl from '@material-ui/core/FormControl'
+import Grid from '@material-ui/core/Grid';
 import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Search from '@material-ui/icons/Search';
+
+const fileFilters = {
+	Everything: "",
+	Videos: "(wmv|mpg|avi|mp4|mkv|mov)",
+	Audio: "(ac3|flac|m4a|mp3|ogg|wav|wma)",
+	Images: "(bmp|gif|jpg|jpeg|png|psd|tif|tiff|svg)",
+	Archives: "(rar|tar|7z|zip|si)",
+	Torrents: "(torrent)",
+	Office: "(xls|xlsx|ppt|pptx|doc|docx|odp|ods|odt|rtf)"
+}
 
 class OpenDirectory extends React.Component {
 	constructor(props) {
@@ -26,11 +37,14 @@ class OpenDirectory extends React.Component {
 	}
 
 	updateURI() {
-		this.setState({ uri: `intext:"${this.state.searchTerm.trim()}" intitle:"index.of" -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)` })
+		var fileFilter = fileFilters[this.state.filter]
+		this.setState({ uri: `intext:"${this.state.searchTerm.trim()}" intitle:"index.of" ${fileFilter} -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)` })
 	}
 
 	handleCheck(event) {
-		this.setState({ filter: event.target.value });
+		this.setState({ filter: event.target.value }, () => {
+			this.updateURI();
+		});
 	}
 
 	handleChange(event) {
@@ -44,11 +58,18 @@ class OpenDirectory extends React.Component {
 			<div>
 				<Card>
 					<CardContent>
-						<Typography className="Title" color="textPrimary" gutterBottom>
-							Open directory search tool
-						</Typography>
-						<form noValidate autoComplete="off">
-							<div>
+						<Grid container spacing={3}>
+							<Grid item xs={12} sm={6}>
+								<Typography 
+										gutterBottom
+										className="Title"
+										color="textPrimary"
+										variant="body1"
+										>
+									Open directory search tool
+								</Typography>
+							</Grid>
+							<Grid item xs={12} sm={6}>
 								<TextField
 									name="searchTerm"
 									value={this.state.searchTerm}
@@ -56,33 +77,56 @@ class OpenDirectory extends React.Component {
 									id="standard-basic"
 									label="Enter search term"
 									margin="normal"
+									variant="outlined"
 								/>
-							</div>
-							<FormControl component="fieldset" name="filter">
-								<RadioGroup aria-label="position" onChange={this.handleCheck} value={this.state.filter} row>
-									<FormControlLabel
-										value="Everything"
-										control={<Radio color="primary" />}
-										label="Everything"
-										labelPlacement="start"
-									/>
-
-									<FormControlLabel
-										value="Audio"
-										control={<Radio color="primary" />}
-										label="Audio"
-										labelPlacement="start"
-									/>
-
-									<FormControlLabel
-										value="Video"
-										control={<Radio color="primary" />}
-										label="Video"
-										labelPlacement="start"
-									/>
-								</RadioGroup>
-							</FormControl>
-						</form>
+							</Grid>
+						</Grid>
+						<FormControl component="fieldset" name="filter">
+							<RadioGroup style={{ justifyContent: 'center' }} aria-label="position" onChange={this.handleCheck} value={this.state.filter} row>
+								<FormControlLabel
+									value="Everything"
+									control={<Radio color="primary" />}
+									label="Everything"
+									labelPlacement="start"
+								/>
+								<FormControlLabel
+									value="Audio"
+									control={<Radio color="primary" />}
+									label="Audio"
+									labelPlacement="start"
+								/>
+								<FormControlLabel
+									value="Images"
+									control={<Radio color="primary" />}
+									label="Images"
+									labelPlacement="start"
+								/>
+								<FormControlLabel
+									value="Videos"
+									control={<Radio color="primary" />}
+									label="Videos"
+									labelPlacement="start"
+								/>
+								<FormControlLabel
+									value="Torrents"
+									control={<Radio color="primary" />}
+									label="Torrents"
+									labelPlacement="start"
+								/>
+								<FormControlLabel
+									value="Archives"
+									control={<Radio color="primary" />}
+									label="Archives"
+									labelPlacement="start"
+								/>
+								<FormControlLabel
+									value="Office"
+									control={<Radio color="primary" />}
+									label="Office"
+									labelPlacement="start"
+								/>
+							</RadioGroup>
+						</FormControl>
 
 						<a href={`https://www.google.com/search?q=${this.state.uri}`}
 							target="_blank"
