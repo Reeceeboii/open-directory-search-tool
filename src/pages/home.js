@@ -11,6 +11,7 @@ import Box from '@material-ui/core/Box';
 import Nav from '../components/nav';
 import Footer from '../components/footer';
 import OpenDirectory from '../components/OpenDirectory';
+import Dorker from '../components/Dorker';
 import '../App.css';
 
 function TabPanel(props) {
@@ -62,13 +63,22 @@ export default function SimpleTabs() {
     <div>
       <Nav />
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
+        <Tabs value={value} onChange={handleChange}
+          aria-label="simple tabs example"
+          variant="fullWidth"
+        >
           <Tab label="Open Directories" {...a11yProps(0)} />
+          <Tab label="Dorker" {...a11yProps(1)} />
         </Tabs>
       </AppBar>
       <TabPanel className="App" value={value} index={0}>
         <Container maxWidth="sm" className="CenteredContainer">
           <OpenDirectory />
+        </Container>
+      </TabPanel>
+      <TabPanel className="App" value={value} index={1}>
+        <Container maxWidth="sm" className="CenteredContainer">
+          <Dorker />
         </Container>
       </TabPanel>
       <Footer />

@@ -59,7 +59,7 @@ class OpenDirectory extends React.Component {
 				<Card>
 					<CardContent>
 						<Grid container spacing={3}>
-							<Grid item xs={12} sm={6}>
+							<Grid item xs={6} sm={6}>
 								<Typography 
 										gutterBottom
 										className="Title"
@@ -69,15 +69,14 @@ class OpenDirectory extends React.Component {
 									Open directory search tool
 								</Typography>
 							</Grid>
-							<Grid item xs={12} sm={6}>
+							<Grid item xs={6} sm={6}>
 								<TextField
 									name="searchTerm"
 									value={this.state.searchTerm}
 									onChange={this.handleChange}
 									id="standard-basic"
-									label="Enter search term"
+									label="Search term"
 									margin="normal"
-									variant="outlined"
 								/>
 							</Grid>
 						</Grid>
