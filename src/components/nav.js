@@ -6,7 +6,6 @@ import Button from '@material-ui/core/Button';
 import Toolbar from '@material-ui/core/Toolbar';
 import SearchIcon from '@material-ui/icons/Search';
 
-
 class Nav extends React.Component {
   render() {
     return (

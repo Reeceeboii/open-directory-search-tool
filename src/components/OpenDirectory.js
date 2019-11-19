@@ -2,6 +2,7 @@ import React from 'react'
 
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
+import { styled } from '@material-ui/core/styles';
 import CardContent from '@material-ui/core/CardContent';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Typography from '@material-ui/core/Typography';
@@ -11,6 +12,15 @@ import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Search from '@material-ui/icons/Search';
+
+const StyledCard = styled(Card)({
+	background: '#FFFFFF',
+});
+
+const StyledTypography = styled(Typography)({
+	display: "block", 
+	alignItems: 'center'
+})
 
 const fileFilters = {
 	Everything: "",
@@ -41,12 +51,14 @@ class OpenDirectory extends React.Component {
 		this.setState({ uri: `intext:"${this.state.searchTerm.trim()}" intitle:"index.of" ${fileFilter} -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)` })
 	}
 
+	// keeps track of which radio buttons are currently pressed
 	handleCheck(event) {
 		this.setState({ filter: event.target.value }, () => {
 			this.updateURI();
 		});
 	}
 
+	// updates state's URI when the textfield's content changes
 	handleChange(event) {
 		this.setState({ [event.target.name]: event.target.value }, () => {
 			this.updateURI();
@@ -56,18 +68,18 @@ class OpenDirectory extends React.Component {
 	render() {
 		return (
 			<div>
-				<Card>
+				<StyledCard>
 					<CardContent>
 						<Grid container spacing={3}>
 							<Grid item xs={6} sm={6}>
-								<Typography 
+								<StyledTypography 
 										gutterBottom
 										className="Title"
 										color="textPrimary"
 										variant="body1"
 										>
 									Open directory search tool
-								</Typography>
+								</StyledTypography>
 							</Grid>
 							<Grid item xs={6} sm={6}>
 								<TextField
@@ -141,7 +153,7 @@ class OpenDirectory extends React.Component {
             			</Button>
 						</a>
 					</CardContent>
-				</Card>
+				</StyledCard>
 			</div>
 		)
 	}

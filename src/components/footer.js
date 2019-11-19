@@ -1,14 +1,18 @@
 import React from 'react';
-import Typography from '@material-ui/core/Typography'
+import Typography from '@material-ui/core/Typography';
+import { styled } from '@material-ui/core/styles';
 
 import '../App.css';
+
+const StyledTypography = styled(Typography)({
+    color: '#FFF'
+})
 
 class Footer extends React.Component {
     render() {
         return (
-            <Typography
+            <StyledTypography
             align="center"
-            style={{ color: "#555555" }}
             >
                 Made by <a 
                 className="text-link"
@@ -17,7 +21,7 @@ class Footer extends React.Component {
                 rel="noopener noreferrer"
                 >Reece Mercer
                 </a>
-            </Typography>
+            </StyledTypography>
         )
     }
 }
