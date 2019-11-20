@@ -15,6 +15,15 @@ import OpenDirectory from '../components/OpenDirectory';
 import Dorker from '../components/Dorker';
 import '../App.css';
 
+const StyledTab = styled(Tab)({
+  backgroundColor: '#455D85',
+  borderBottom: '2px solid #FFFFFF'
+});
+
+const StyledTabs = styled(Tabs)({
+  backgroundColor: '#455D85'
+});
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -64,13 +73,13 @@ export default function SimpleTabs() {
     <div>
       <Nav />
       <AppBar position="static">
-        <Tabs value={value} onChange={handleChange}
+        <StyledTabs value={value} onChange={handleChange}
           aria-label="simple tabs example"
-          variant="fullWidth"
+          centered
         >
-          <Tab label="Open Directories" {...a11yProps(0)} />
-          <Tab label="Dorker" {...a11yProps(1)} />
-        </Tabs>
+          <StyledTab label="Open Directories" {...a11yProps(0)} />
+          <StyledTab label="Dorker" {...a11yProps(1)} />
+        </StyledTabs>
       </AppBar>
       <TabPanel className="App" value={value} index={0}>
         <Container maxWidth="sm" className="CenteredContainer">
