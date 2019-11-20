@@ -17,11 +17,6 @@ const StyledCard = styled(Card)({
 	background: '#FFFFFF',
 });
 
-const StyledTypography = styled(Typography)({
-	display: "block", 
-	alignItems: 'center'
-})
-
 const fileFilters = {
 	Everything: "",
 	Videos: "(wmv|mpg|avi|mp4|mkv|mov)",
@@ -31,6 +26,8 @@ const fileFilters = {
 	Torrents: "(torrent)",
 	Office: "(xls|xlsx|ppt|pptx|doc|docx|odp|ods|odt|rtf)"
 }
+
+const directoryTypes = ["Everything", "Audio", "Images", "Videos", "Torrents", "Archives", "Office"];
 
 class OpenDirectory extends React.Component {
 	constructor(props) {
@@ -46,6 +43,7 @@ class OpenDirectory extends React.Component {
 		this.handleCheck = this.handleCheck.bind(this);
 	}
 
+	// inject corresponding state elems into URI at correct positions
 	updateURI() {
 		var fileFilter = fileFilters[this.state.filter]
 		this.setState({ uri: `intext:"${this.state.searchTerm.trim()}" intitle:"index.of" ${fileFilter} -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)` })
@@ -70,18 +68,18 @@ class OpenDirectory extends React.Component {
 			<div>
 				<StyledCard>
 					<CardContent>
-						<Grid container spacing={3}>
-							<Grid item xs={6} sm={6}>
-								<StyledTypography 
+						<Grid style={{alignItems: 'center'}} container spacing={3}>
+							<Grid item xs={12} sm={6}>
+								<Typography 
 										gutterBottom
 										className="Title"
 										color="textPrimary"
 										variant="body1"
 										>
 									Open directory search tool
-								</StyledTypography>
+								</Typography>
 							</Grid>
-							<Grid item xs={6} sm={6}>
+							<Grid item xs={12} sm={6}>
 								<TextField
 									name="searchTerm"
 									value={this.state.searchTerm}
@@ -92,50 +90,22 @@ class OpenDirectory extends React.Component {
 								/>
 							</Grid>
 						</Grid>
+
 						<FormControl component="fieldset" name="filter">
 							<RadioGroup style={{ justifyContent: 'center' }} aria-label="position" onChange={this.handleCheck} value={this.state.filter} row>
-								<FormControlLabel
-									value="Everything"
-									control={<Radio color="primary" />}
-									label="Everything"
-									labelPlacement="start"
-								/>
-								<FormControlLabel
-									value="Audio"
-									control={<Radio color="primary" />}
-									label="Audio"
-									labelPlacement="start"
-								/>
-								<FormControlLabel
-									value="Images"
-									control={<Radio color="primary" />}
-									label="Images"
-									labelPlacement="start"
-								/>
-								<FormControlLabel
-									value="Videos"
-									control={<Radio color="primary" />}
-									label="Videos"
-									labelPlacement="start"
-								/>
-								<FormControlLabel
-									value="Torrents"
-									control={<Radio color="primary" />}
-									label="Torrents"
-									labelPlacement="start"
-								/>
-								<FormControlLabel
-									value="Archives"
-									control={<Radio color="primary" />}
-									label="Archives"
-									labelPlacement="start"
-								/>
-								<FormControlLabel
-									value="Office"
-									control={<Radio color="primary" />}
-									label="Office"
-									labelPlacement="start"
-								/>
+								
+								{
+								// map button types as radio buttons into RadioGroup
+								directoryTypes.map( type => (
+										<FormControlLabel 
+											key={ type }
+											value={ type }
+											control={ <Radio color="primary" /> }
+											label={ type }
+											labelPlacement="start"
+										/>
+									))
+								}
 							</RadioGroup>
 						</FormControl>
 
