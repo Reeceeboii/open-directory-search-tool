@@ -1,5 +1,4 @@
 import React from 'react'
-
 import TextField from '@material-ui/core/TextField';
 import Card from '@material-ui/core/Card';
 import Paper from '@material-ui/core/Paper';
@@ -13,13 +12,10 @@ import Button from '@material-ui/core/Button';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import Search from '@material-ui/icons/Search';
-
-const StyledCard = styled(Card)({
-	background: '#F0F0F0'
-});
+import StyledCard from '../components/StyledCard';
 
 const StyledPaper = styled(Paper)({
-  background: '#D0D0D0'
+  background: '#BCC3D1'
 });
 
 const fileFilters = {

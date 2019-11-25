@@ -10,11 +10,9 @@
   border-bottom-color: transparent;
   border-bottom: dotted 1px;
   transition: border-bottom-color .2s;
-  transition: transform .2s;
 }
 
 .text-link:hover {
-  transform: scale(1.25);
   border-bottom-color: transparent;
 }
 
