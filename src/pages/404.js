@@ -18,7 +18,7 @@ class Home extends React.Component {
           <Link to="/">
             <Button
               variant="contained"
-              color="primary"
+              color="secondary"
               startIcon={<ArrowBack />}
               style={{margin: "auto"}}
             >

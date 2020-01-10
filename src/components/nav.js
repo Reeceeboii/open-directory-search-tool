@@ -22,7 +22,7 @@ class Nav extends React.Component {
                 color="inherit"
                 size="large"
                 startIcon={<SearchIcon />}>
-              Dorker & advanced search tools
+              Open Directory Search Tool
               </Button>
           </Link>
           </Toolbar>

@@ -12,7 +12,6 @@ import { styled } from '@material-ui/core/styles';
 import Nav from '../components/nav';
 import Footer from '../components/footer';
 import OpenDirectory from '../components/OpenDirectory';
-import Dorker from '../components/Dorker';
 import '../App.css';
 
 const StyledTab = styled(Tab)({
@@ -77,8 +76,7 @@ export default function SimpleTabs() {
           aria-label="simple tabs example"
           centered
         >
-          <StyledTab label="Open Directories" {...a11yProps(0)} />
-          <StyledTab label="Dorker" {...a11yProps(1)} />
+          <StyledTab label="Open Directory search tool" {...a11yProps(0)} />
         </StyledTabs>
       </AppBar>
       <TabPanel className="App" value={value} index={0}>
@@ -88,7 +86,6 @@ export default function SimpleTabs() {
       </TabPanel>
       <TabPanel className="App" value={value} index={1}>
         <Container maxWidth="sm" className="CenteredContainer">
-          <Dorker />
         </Container>
       </TabPanel>
       <Footer />

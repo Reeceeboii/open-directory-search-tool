@@ -21,6 +21,13 @@ class Footer extends React.Component {
                 rel="noopener noreferrer"
                 >Reece Mercer
                 </a>
+                {` `} | Find me on <a 
+                className="text-link"
+                href="https://www.github.com/Reeceeboii" 
+                target="_blank"
+                rel="noopener noreferrer"
+                >GitHub
+                </a>
             </StyledTypography>
         )
     }
