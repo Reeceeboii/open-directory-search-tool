@@ -7,7 +7,7 @@ import Tab from '@material-ui/core/Tab'
 import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
-
+import GithubCorner from 'react-github-corner'
 import Footer from '../components/footer'
 import About from '../components/about'
 import OpenDirectory from '../components/OpenDirectory'
@@ -69,6 +69,9 @@ export default function SimpleTabs () {
           <StyledTab label="Open Directory search tool" {...a11yProps(0)} />
           <StyledTab label="About" {...a11yProps(1)} />
         </StyledTabs>
+        <GithubCorner
+          size="45"
+          href="https://github.com/Reeceeboii/open-directory-search-tool" />
       </AppBar>
       <TabPanel className="App" value={value} index={0}>
         <Container maxWidth="sm" className="CenteredContainer">
