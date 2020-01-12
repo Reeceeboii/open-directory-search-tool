@@ -9,7 +9,8 @@ const StyledTypography = styled(Typography)({
 })
 
 const StyledPaper = styled(Paper)({
-  padding: '20px'
+  padding: '20px',
+  background: '#BCC3D1'
 })
 
 class About extends React.Component {
