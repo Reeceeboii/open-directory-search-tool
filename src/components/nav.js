@@ -1,18 +1,17 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
-import { styled } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
-import Toolbar from '@material-ui/core/Toolbar';
-import SearchIcon from '@material-ui/icons/Search';
+import { Link } from 'react-router-dom'
+import { styled } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Button from '@material-ui/core/Button'
+import Toolbar from '@material-ui/core/Toolbar'
+import SearchIcon from '@material-ui/icons/Search'
 
 const StyledNav = styled(AppBar)({
   backgroundColor: '#06274C'
-});
-
+})
 
 class Nav extends React.Component {
-  render() {
+  render () {
     return (
       <div>
         <StyledNav position="static">
@@ -24,7 +23,7 @@ class Nav extends React.Component {
                 startIcon={<SearchIcon />}>
               Open Directory Search Tool
               </Button>
-          </Link>
+            </Link>
           </Toolbar>
         </StyledNav>
       </div>
@@ -32,4 +31,4 @@ class Nav extends React.Component {
   }
 }
 
-export default Nav;
+export default Nav

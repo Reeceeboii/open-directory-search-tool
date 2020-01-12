@@ -1,30 +1,29 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
-import Box from '@material-ui/core/Box';
-import { styled } from '@material-ui/core/styles';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { styled } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Tabs from '@material-ui/core/Tabs'
+import Tab from '@material-ui/core/Tab'
+import Container from '@material-ui/core/Container'
+import Typography from '@material-ui/core/Typography'
+import Box from '@material-ui/core/Box'
 
-import Nav from '../components/nav';
-import Footer from '../components/footer';
-import OpenDirectory from '../components/OpenDirectory';
-import '../App.css';
+import Nav from '../components/nav'
+import Footer from '../components/footer'
+import OpenDirectory from '../components/OpenDirectory'
+import '../App.css'
 
 const StyledTab = styled(Tab)({
   backgroundColor: '#455D85',
   borderBottom: '2px solid #FFFFFF'
-});
+})
 
 const StyledTabs = styled(Tabs)({
   backgroundColor: '#455D85'
-});
+})
 
-function TabPanel(props) {
-  const { children, value, index, ...other } = props;
+function TabPanel (props) {
+  const { children, value, index, ...other } = props
 
   return (
     <Typography
@@ -37,36 +36,28 @@ function TabPanel(props) {
     >
       <Box p={3}>{children}</Box>
     </Typography>
-  );
+  )
 }
 
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired,
-};
-
-function a11yProps(index) {
-  return {
-    id: `simple-tab-${index}`,
-    'aria-controls': `simple-tabpanel-${index}`,
-  };
+  value: PropTypes.any.isRequired
 }
 
-const useStyles = makeStyles(theme => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: theme.palette.background.paper,
-  },
-}));
+function a11yProps (index) {
+  return {
+    id: `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`
+  }
+}
 
-export default function SimpleTabs() {
-  const classes = useStyles();
-  const [value, setValue] = React.useState(0);
+export default function SimpleTabs () {
+  const [value, setValue] = React.useState(0)
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+    setValue(newValue)
+  }
 
   return (
     <div>
@@ -90,5 +81,5 @@ export default function SimpleTabs() {
       </TabPanel>
       <Footer />
     </div>
-  );
+  )
 }
