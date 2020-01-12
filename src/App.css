@@ -18,6 +18,8 @@
 
 .CenteredContainer {
   text-align: center;
+  padding: 0px !important;
+  max-width: 700px !important;
 }
 
 .Header {
@@ -28,4 +30,3 @@
 .NavLink {
   color: white;
 }
-

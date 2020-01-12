@@ -8,8 +8,8 @@ import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 
-import Nav from '../components/nav'
 import Footer from '../components/footer'
+import About from '../components/about'
 import OpenDirectory from '../components/OpenDirectory'
 import '../App.css'
 
@@ -61,13 +61,13 @@ export default function SimpleTabs () {
 
   return (
     <div>
-      <Nav />
       <AppBar position="static">
         <StyledTabs value={value} onChange={handleChange}
           aria-label="simple tabs example"
           centered
         >
           <StyledTab label="Open Directory search tool" {...a11yProps(0)} />
+          <StyledTab label="About" {...a11yProps(1)} />
         </StyledTabs>
       </AppBar>
       <TabPanel className="App" value={value} index={0}>
@@ -76,6 +76,11 @@ export default function SimpleTabs () {
         </Container>
       </TabPanel>
       <TabPanel className="App" value={value} index={1}>
+        <Container maxWidth="sm" className="CenteredContainer">
+          <About />
+        </Container>
+      </TabPanel>
+      <TabPanel className="App" value={value} index={2}>
         <Container maxWidth="sm" className="CenteredContainer">
         </Container>
       </TabPanel>
