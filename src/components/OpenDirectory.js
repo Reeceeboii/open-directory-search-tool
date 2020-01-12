@@ -24,10 +24,12 @@ const fileFilters = {
   Images: '(bmp|gif|jpg|jpeg|png|psd|tif|tiff|svg)',
   Archives: '(rar|tar|7z|zip|si)',
   Torrents: '(torrent)',
-  Office: '(xls|xlsx|ppt|pptx|doc|docx|odp|ods|odt|rtf)'
+  Office: '(xls|xlsx|ppt|pptx|doc|docx|odp|ods|odt|rtf)',
+  eBooks: '(rzb|tpz|apnx|lrs|mart|tk3|mobi|azw3|kfx|ncx|ibooks|lrf)'
 }
 
-const directoryTypes = ['Anything', 'Audio', 'Images', 'Videos', 'Torrents', 'Archives', 'Office']
+const directoryTypes = ['Anything', 'Audio', 'Images', 'Videos',
+  'Torrents', 'Archives', 'Office', 'eBooks']
 
 class OpenDirectory extends React.Component {
   constructor (props) {
@@ -168,7 +170,7 @@ class OpenDirectory extends React.Component {
                   <Typography
                     paragraph
                     color="textPrimary"
-                    variant="body1"
+                    variant="body2"
                   >
                     <code>{this.state.uri}</code>
                   </Typography>
