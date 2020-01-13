@@ -23,9 +23,8 @@ class About extends React.Component {
           >
         About
           </StyledTypography>
-          <StyledTypography
-            variant="p"
-          >
+          <hr/>
+          <StyledTypography>
             {'This tool is built with the aim of helping in the hunt for \
            open directories. Inspired partly by '}
             <a
@@ -39,6 +38,25 @@ class About extends React.Component {
            provided by search engines to uncover them. According to the \
            subreddit, open directories are \'unprotected directories of pics, \
            vids, music, software and otherwise interesting files.\''}
+          </StyledTypography>
+          <hr/>
+          <StyledTypography
+            align="center"
+          >
+                Made by <a
+              className="text-link"
+              href="https://www.reecemercer.dev"
+              target="_blank"
+              rel="noopener noreferrer"
+            >Reece Mercer
+            </a>
+            {' '} | Find me on <a
+              className="text-link"
+              href="https://www.github.com/Reeceeboii"
+              target="_blank"
+              rel="noopener noreferrer"
+            >GitHub
+            </a>
           </StyledTypography>
         </StyledPaper>
       </div>

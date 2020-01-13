@@ -8,7 +8,6 @@ import Container from '@material-ui/core/Container'
 import Typography from '@material-ui/core/Typography'
 import Box from '@material-ui/core/Box'
 import GithubCorner from 'react-github-corner'
-import Footer from '../components/footer'
 import About from '../components/about'
 import OpenDirectory from '../components/OpenDirectory'
 import '../App.css'
@@ -87,7 +86,6 @@ export default function SimpleTabs () {
         <Container maxWidth="sm" className="CenteredContainer">
         </Container>
       </TabPanel>
-      <Footer />
     </div>
   )
 }

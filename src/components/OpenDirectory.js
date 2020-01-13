@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography'
 import FormControl from '@material-ui/core/FormControl'
 import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
+import Checkbox from '@material-ui/core/Checkbox'
+import Tooltip from '@material-ui/core/Tooltip'
 import Radio from '@material-ui/core/Radio'
 import RadioGroup from '@material-ui/core/RadioGroup'
 import Search from '@material-ui/icons/Search'
@@ -25,7 +27,7 @@ const fileFilters = {
   Archives: '(rar|tar|7z|zip|si)',
   Torrents: '(torrent)',
   Office: '(xls|xlsx|ppt|pptx|doc|docx|odp|ods|odt|rtf)',
-  eBooks: '(rzb|tpz|apnx|lrs|mart|tk3|mobi|azw3|kfx|ncx|ibooks|lrf)'
+  eBooks: '(rzb|tpz|apnx|lrs|mart|tk3|mobi|azw3|kfx|ncx|ibooks|lrf|pdf)'
 }
 
 const directoryTypes = ['Anything', 'Audio', 'Images', 'Videos',
@@ -38,28 +40,39 @@ class OpenDirectory extends React.Component {
     this.state = {
       searchTerm: '',
       uri: 'intext:"" intitle:"index.of" -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)',
-      filter: 'Anything'
+      filter: 'Anything',
+      tokenise: false
     }
-
-    this.handleChange = this.handleChange.bind(this)
-    this.handleCheck = this.handleCheck.bind(this)
   }
 
   // inject corresponding state elems into URI at correct positions
-  updateURI () {
+  updateURI = () => {
     var fileFilter = fileFilters[this.state.filter]
-    this.setState({ uri: `intext:"${this.state.searchTerm.trim()}" intitle:"index.of" ${fileFilter} -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)` })
+    if (!this.state.tokenise) {
+      this.setState({ uri: `intext:"${this.state.searchTerm.trim()}" intitle:"index.of" ${fileFilter} -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)` })
+    } else {
+      var tokens = this.state.searchTerm.replace(/ +(?= )/g, '').split(' ')
+      this.setState({ uri: `intext:(${tokens.join('|')}) intitle:"index.of" ${fileFilter} -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)` })
+
+    }
   }
 
   // keeps track of which radio buttons are currently pressed
-  handleCheck (event) {
+  handleCheck = (event) => {
     this.setState({ filter: event.target.value }, () => {
       this.updateURI()
     })
   }
 
+  // handle the state change when a user wants their query tokenised
+  handleTokenise = (event) => {
+    this.setState({ tokenise: !this.state.tokenise }, () => {
+      this.updateURI()
+    })
+  }
+
   // updates state's URI when the textfield's content changes
-  handleChange (event) {
+  handleChange = (event) => {
     this.setState({ [event.target.name]: event.target.value }, () => {
       this.updateURI()
     })
@@ -115,6 +128,19 @@ class OpenDirectory extends React.Component {
                 />
               </Grid>
             </Grid>
+            <Tooltip
+              title={'Split your query into words, using spaces as the delimiter. \
+              May return more results.'}
+              placement="left">
+              <FormControlLabel
+                control={<Checkbox
+                  checked={this.state.tokenise}
+                  onChange={this.handleTokenise}
+                  color="secondary"/>}
+                label="Tokenise input"
+                labelPlacement="start"
+              />
+            </Tooltip>
             <Grid style={{ alignItems: 'center' }} container spacing={1}>
 
               <FormControl component="fieldset" name="filter">
