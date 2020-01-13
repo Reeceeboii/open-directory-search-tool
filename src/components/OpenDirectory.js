@@ -51,9 +51,8 @@ class OpenDirectory extends React.Component {
     if (!this.state.tokenise) {
       this.setState({ uri: `intext:"${this.state.searchTerm.trim()}" intitle:"index.of" ${fileFilter} -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)` })
     } else {
-      var tokens = this.state.searchTerm.replace(/ +(?= )/g, '').split(' ')
+      var tokens = this.state.searchTerm.replace(/ +(?= )/g, '').split(' ').filter(Boolean)
       this.setState({ uri: `intext:(${tokens.join('|')}) intitle:"index.of" ${fileFilter} -inurl:(jsp|pl|php|html|aspx|htm|cf|shtml)` })
-
     }
   }
 
@@ -107,16 +106,6 @@ class OpenDirectory extends React.Component {
           <CardContent>
             <Grid style={{ alignItems: 'center' }} container spacing={3}>
               <Grid item xs={12} sm={6}>
-                <Typography
-                  gutterBottom
-                  className="Title"
-                  color="textPrimary"
-                  variant="body1"
-                >
-                Open directory search tool
-                </Typography>
-              </Grid>
-              <Grid item xs={12} sm={6}>
                 <TextField
                   name="searchTerm"
                   value={this.state.searchTerm}
@@ -125,24 +114,28 @@ class OpenDirectory extends React.Component {
                   label="Search term"
                   margin="normal"
                   color="secondary"
+                  variant="outlined"
                 />
               </Grid>
+              <Grid item xs={12} sm={6}>
+                <Tooltip
+                  title={'Split your query into words, using spaces as the delimiter. \
+              May return more results. With this unchecked, the query is used to \
+              find files containing or exactly your search string.'}
+                  placement="right">
+                  <FormControlLabel
+                    control={
+                      <Checkbox
+                        checked={this.state.tokenise}
+                        onChange={this.handleTokenise}
+                        color="secondary"/>}
+                    label="Tokenise input"
+                    labelPlacement="start"
+                  />
+                </Tooltip>
+              </Grid>
             </Grid>
-            <Tooltip
-              title={'Split your query into words, using spaces as the delimiter. \
-              May return more results.'}
-              placement="left">
-              <FormControlLabel
-                control={<Checkbox
-                  checked={this.state.tokenise}
-                  onChange={this.handleTokenise}
-                  color="secondary"/>}
-                label="Tokenise input"
-                labelPlacement="start"
-              />
-            </Tooltip>
             <Grid style={{ alignItems: 'center' }} container spacing={1}>
-
               <FormControl component="fieldset" name="filter">
                 <RadioGroup style={{ justifyContent: 'center' }}
                   aria-label="position"
