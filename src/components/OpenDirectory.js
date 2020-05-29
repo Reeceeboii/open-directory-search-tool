@@ -75,19 +75,16 @@ class OpenDirectory extends React.Component {
 
   render () {
     const searchButton = (this.state.searchTerm.trim().length > 0)
-      ? <a href={`https://www.google.com/search?q=${this.state.uri}`}
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <Button
+      ? <Button
           variant="contained"
           color="secondary"
           startIcon={<Search />}
           style={{ margin: 'auto' }}
+          // open search term in new tab
+          onClick={() => { window.open(`https://www.google.com/search?q=${this.state.uri}`, '_blank') }}
         >
         Find Directories
         </Button>
-      </a>
       : <Button
         disabled
         startIcon={<Search />}
@@ -95,11 +92,6 @@ class OpenDirectory extends React.Component {
       >
       Find Directories
       </Button>
-
-    const filterTooltip = (this.state.filter === 'Anything'
-      ? 'Any files'
-      : fileFilters[this.state.filter]
-    )
 
     return (
       <div>
@@ -112,7 +104,6 @@ class OpenDirectory extends React.Component {
                 </Typography>
               </Grid>
               <Grid item xs={12} sm={6}>
-                <Tooltip title={filterTooltip}>
                   <FormControl variant="outlined" color="secondary">
                     <InputLabel>File filter</InputLabel>
                     <Select
@@ -131,7 +122,6 @@ class OpenDirectory extends React.Component {
                     </Select>
                     <FormHelperText>Please pick a file type to search for.</FormHelperText>
                   </FormControl>
-                </Tooltip>
               </Grid>
             </Grid>
             <Grid style={{ alignItems: 'center' }} container>
