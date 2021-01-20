@@ -1,14 +1,9 @@
 html, body {
-  background: #BCC3D1;
+  background: white;
   height: 100%;
   margin: 0;
   font-family: Roboto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }

@@ -1,6 +1,6 @@
 {
-  "short_name": "Dorker",
-  "name": "Find interesting files and accidentally leaked data using just a search engine!",
+  "short_name": "open-directory-search-tool",
+  "name": "Find interesting files and servers using just a search engine!",
   "icons": [
     {
       "src": "favicon.ico",
